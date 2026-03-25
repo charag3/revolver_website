@@ -1,0 +1,126 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 20px 0;
+  transition: background 0.4s ease, padding 0.4s ease, backdrop-filter 0.4s ease;
+}
+
+.nav.scrolled {
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 14px 0;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+.links {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  pointer-events: auto;
+}
+
+.links a {
+  color: var(--text);
+  text-decoration: none;
+  font-family: var(--font-zing), sans-serif;
+  font-size: 0.85rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transition: color var(--transition);
+  white-space: nowrap;
+}
+
+.links a:hover {
+  color: var(--primary);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  z-index: 10;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+}
+
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: all var(--transition);
+}
+
+@media (max-width: 900px) {
+  .links {
+    position: absolute;
+    display: none;
+    top: 100%;
+    left: 0;
+    right: 0;
+    transform: none;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    padding: 20px 24px;
+    background: rgba(0, 0, 0, 0.98);
+    border-top: 1px solid var(--glass-border);
+    backdrop-filter: blur(20px);
+  }
+
+  .links.open {
+    display: flex;
+  }
+
+  .links a {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--glass-border);
+    width: 100%;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  /* Cache the CTA on tablet and smaller if needed, but let's keep it visible or hide inside menu */
+  .actions a {
+    display: none; /* Hide button on mobile, put inside menu or keep visible? user usually wants it inside menu or floating */
+  }
+}
+
+@media (min-width: 901px) {
+  .actions a.btn-primary {
+    color: #000 !important;
+  }
+}

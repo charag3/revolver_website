@@ -1,0 +1,170 @@
+.section {
+  padding: 120px 0;
+  background: var(--bg-section);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 70px;
+}
+
+.googleBadge {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 16px 24px;
+  border-radius: 12px;
+  border: 1px solid var(--glass-border);
+  margin-bottom: 24px;
+}
+
+.googleBrand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.ratingInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.score {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #fff;
+}
+
+.starsStatic {
+  display: flex;
+  gap: 2px;
+  color: #FBBC05;
+  font-size: 1.1rem;
+}
+
+.starsStatic .full {
+  color: #FBBC05;
+}
+
+.starsStatic .half {
+  color: rgba(251, 188, 5, 0.3);
+}
+
+.count {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.title {
+  font-family: var(--font-zing), sans-serif;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  margin-bottom: 16px;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.subtitle {
+  color: var(--text-muted);
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.grid {
+  margin-bottom: 50px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 32px;
+  transition: transform var(--transition), border-color var(--transition);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(251, 188, 5, 0.4);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.authorInfo {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #fff;
+}
+
+.date {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.stars {
+  color: #FBBC05;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+}
+
+.text {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
+  font-style: italic;
+  flex-grow: 1;
+}
+
+.bikeTag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--primary);
+  opacity: 0.8;
+}
+
+.footerAction {
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 80px 0;
+  }
+}

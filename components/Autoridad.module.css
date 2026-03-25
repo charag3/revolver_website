@@ -1,0 +1,18 @@
+.section {
+  background: var(--bg-section);
+  padding: 120px 0;
+}
+
+.grid {
+  margin-top: 0;
+}
+
+.card {
+  background: #0a0a0a;
+  border: 1px solid var(--glass-border);
+}
+
+.icon {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}

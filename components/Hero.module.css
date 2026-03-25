@@ -1,0 +1,224 @@
+.hero {
+  position: relative;
+  min-height: 100vh;
+  background: #000;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding-top: 100px;
+}
+
+/* Full-width background gradient */
+.stripe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(ellipse 80% 100% at 100% 50%, rgba(196, 35, 25, 0.35) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 80% at 60% 0%, rgba(196, 35, 25, 0.12) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  gap: 0;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+/* COPY */
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  z-index: 2;
+  max-width: 740px;
+}
+
+.badgeVisitanos {
+  display: inline-flex;
+  align-self: flex-start;
+  padding: 4px 12px;
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--font-zing), sans-serif;
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  margin-bottom: 24px;
+}
+
+.preheader {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.locationTag {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 16px;
+  border-left: 2px solid var(--accent);
+  padding-left: 12px;
+}
+
+.title {
+  font-size: clamp(2.8rem, 6.8vw, 6rem); 
+  margin-bottom: 24px;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: rgba(245, 245, 245, 0.8);
+  max-width: 500px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-top: 36px;
+  flex-wrap: wrap;
+}
+
+.linkSec {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+.linkSec:hover { color: var(--primary); }
+
+/* Brand pills */
+.brands {
+  display: flex;
+  gap: 10px;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+
+.pill {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+  border: 1px solid var(--glass-border);
+  padding: 5px 12px;
+  border-radius: 100px;
+  text-transform: uppercase;
+}
+
+/* VISUAL */
+.visual {
+  position: absolute;
+  right: -140px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 63vw;
+  height: 81vh;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.glow {
+  position: absolute;
+  width: 700px;
+  height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(253, 221, 31, 0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.helmet {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  animation: floatIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes floatIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* TRUST BAR */
+.trustBar {
+  background: var(--accent);
+  padding: 24px 0;
+  margin-top: auto;
+  overflow: hidden;
+  position: relative;
+  white-space: nowrap;
+}
+
+.trustTrack {
+  display: flex;
+  width: max-content;
+  animation: scroll 40s linear infinite;
+}
+
+.trustSet {
+  display: flex;
+  align-items: center;
+  gap: 120px;
+  padding-right: 120px;
+}
+
+.trustItem {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.trustItem strong { color: var(--primary); }
+
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-33.333%); }
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .copy {
+    padding-top: 20px;
+  }
+  
+  .visual {
+    width: 80vw;
+    height: 40vh;
+    right: -40px;
+    top: 65%;
+  }
+
+  .trustSet {
+    gap: 60px;
+    padding-right: 60px;
+  }
+}
