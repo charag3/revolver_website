@@ -22,7 +22,7 @@ export default function Navbar() {
           <Image
             src="/logo_text.png"
             alt="Revolver Garaje — Taller Multimarca Toluca"
-            width={180}
+            width={60}
             height={60}
             priority
             style={{ objectFit: "contain" }}

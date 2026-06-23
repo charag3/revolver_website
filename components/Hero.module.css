@@ -127,7 +127,7 @@
   position: absolute;
   right: -140px;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(calc(-50% + var(--parallax-offset, 0px)));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -206,15 +206,66 @@
 
 /* RESPONSIVE */
 @media (max-width: 900px) {
-  .copy {
-    padding-top: 20px;
+  .hero {
+    padding-top: 80px; /* Reduced for mobile */
   }
-  
+
+  .content {
+    flex-direction: column-reverse;
+    justify-content: flex-start;
+    padding-top: 0;
+    gap: 20px;
+  }
+
+  .copy {
+    padding-top: 0;
+    align-items: center;
+    text-align: center;
+    max-width: 100%;
+  }
+
+  .preheader {
+    margin-bottom: 8px;
+  }
+
+  .title {
+    margin-bottom: 16px;
+    font-size: clamp(2.4rem, 10vw, 3.8rem);
+  }
+
+  .subtitle {
+    margin: 0 auto 24px;
+    max-width: 100%;
+    font-size: 1rem;
+  }
+
+  .actions {
+    justify-content: center;
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .brands {
+    justify-content: center;
+    margin-top: 30px;
+  }
+
   .visual {
-    width: 80vw;
-    height: 40vh;
-    right: -40px;
-    top: 65%;
+    position: relative;
+    right: auto;
+    top: auto;
+    width: 100%;
+    max-width: 420px;
+    height: auto;
+    aspect-ratio: 1/1;
+    margin: 0 auto;
+    transform: translateY(var(--parallax-offset, 0px));
+    z-index: 1;
+  }
+
+  .glow {
+    width: 300px;
+    height: 300px;
   }
 
   .trustSet {

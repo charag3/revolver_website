@@ -42,13 +42,13 @@ export default function Testimonios() {
               <span>Reseñas de Google</span>
             </div>
             <div className={styles.ratingInfo}>
-              <span className={styles.score}>4.6</span>
+              <span className={styles.score}>4.8</span>
               <div className={styles.starsStatic}>
                 {"★★★★★".split("").map((s, i) => (
-                  <span key={i} className={i < 4 ? styles.full : styles.half}>★</span>
+                  <span key={i} className={styles.full}>★</span>
                 ))}
               </div>
-              <span className={styles.count}>(84 reseñas)</span>
+              <span className={styles.count}>(74 reseñas)</span>
             </div>
           </div>
           <h2 className={styles.title}>Confianza que ruge en Toluca</h2>
@@ -84,7 +84,7 @@ export default function Testimonios() {
 
         <div className={styles.footerAction}>
           <a
-            href="https://g.page/r/revolver-garaje/review"
+            href="https://g.page/r/CRrDGnn4DcdLEAE/review"
             target="_blank"
             rel="noopener noreferrer"
             className="btn-primary"

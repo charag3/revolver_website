@@ -83,6 +83,11 @@
 }
 
 @media (max-width: 900px) {
+  .inner {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
   .links {
     position: absolute;
     display: none;

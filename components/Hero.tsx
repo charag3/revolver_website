@@ -57,7 +57,7 @@ export default function Hero() {
         {/* RIGHT — helmet image */}
         <div 
           className={styles.visual}
-          style={{ transform: `translateY(calc(-50% + ${offset * 0.15}px))` }}
+          style={{ "--parallax-offset": `-${offset * 0.15}px` } as React.CSSProperties}
         >
           <div className={styles.glow} />
           <Image
