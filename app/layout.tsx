@@ -8,6 +8,7 @@ const zingRust = localFont({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.revolvergaraje.com"),
   title: "Revolver Garaje | Taller de Motos en Toluca | Especialista KTM, Bajaj, Vento",
   description: "El mejor taller de motos multimarca en Toluca. Especialistas en KTM, Bajaj, Vento y alta cilindrada. Mantenimiento, reparaciones y refacciones originales.",
   keywords: ["taller de motos Toluca", "mecánico de motos Toluca", "KTM Toluca", "Bajaj Toluca", "Vento Toluca", "refacciones motos Toluca"],
