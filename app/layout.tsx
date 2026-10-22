@@ -17,6 +17,8 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.revolvergaraje.com"),
   title,
   description,
+  // Search Console (propiedad de prefijo https://www.revolvergaraje.com/, cuenta team@somaspace.site)
+  verification: { google: "p490xFmVBzrTNCBKWWch7WDL0FV3IMsWMUvBJtjhQAI" },
   openGraph: {
     title,
     description,
