@@ -32,6 +32,7 @@ export default function Hero() {
           <div className={styles.actions}>
             <a
               href="https://wa.me/527225663204"
+              data-ubicacion="hero"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary"

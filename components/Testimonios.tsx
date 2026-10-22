@@ -48,7 +48,7 @@ export default function Testimonios() {
                   <span key={i} className={styles.full}>★</span>
                 ))}
               </div>
-              <span className={styles.count}>(74 reseñas)</span>
+              <span className={styles.count}>(+90 reseñas en Google)</span>
             </div>
           </div>
           <h2 className={styles.title}>Confianza que ruge en Toluca</h2>

@@ -30,6 +30,7 @@ export default function Footer() {
           <div className={styles.contact}>
             <a
               href="https://wa.me/527225663204"
+              data-ubicacion="footer"
               target="_blank"
               rel="noopener noreferrer"
               className={styles.wa}

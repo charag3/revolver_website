@@ -15,7 +15,7 @@ export default function Contacto() {
             </h2>
             <p className={styles.address}>
               Av. Cuauhtémoc 238, <br />
-              <strong>El Carmen Totoltepec (San Pedro)</strong>, CP 50226, Toluca, Méx.
+              <strong>El Carmen Totoltepec</strong>, Santa María Totoltepec, CP 50240, Toluca, Méx.
             </p>
             <p className={styles.landmarks}>
               📍 Cerca del <strong>Parque Industrial Exportec</strong> y el <strong>Aeropuerto de Toluca</strong>, a un paso de Paseo Tollocan.
@@ -26,6 +26,7 @@ export default function Contacto() {
             </p>
             <a
               href="https://wa.me/527225663204"
+              data-ubicacion="contacto"
               target="_blank"
               rel="noopener noreferrer"
               className={`btn-primary btn-whatsapp ${styles.cta}`}

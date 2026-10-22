@@ -39,6 +39,7 @@ export default function Navbar() {
         <div className={styles.actions}>
           <a
             href="https://wa.me/527225663204"
+            data-ubicacion="header"
             target="_blank"
             rel="noopener noreferrer"
             className="btn-primary"
