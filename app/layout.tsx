@@ -1,5 +1,7 @@
 import localFont from "next/font/local";
 import type { Metadata } from "next";
+import Script from "next/script";
+import ClickTracking from "@/components/ClickTracking";
 import "./globals.css";
 
 const zingRust = localFont({
@@ -7,19 +9,29 @@ const zingRust = localFont({
   variable: "--font-zing",
 });
 
+const title = "Taller de motos en Toluca, Bajaj y KTM | Revolver Garaje";
+const description =
+  "Mantenimiento, diagnóstico y refacciones originales para tu moto en Toluca: Bajaj, KTM, Vento y alta cilindrada. 4.8★ en Google. Agenda tu cita por WhatsApp.";
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.revolvergaraje.com"),
-  title: "Revolver Garaje | Taller de Motos en Toluca | Especialista KTM, Bajaj, Vento",
-  description: "El mejor taller de motos multimarca en Toluca. Especialistas en KTM, Bajaj, Vento y alta cilindrada. Mantenimiento, reparaciones y refacciones originales.",
-  keywords: ["taller de motos Toluca", "mecánico de motos Toluca", "KTM Toluca", "Bajaj Toluca", "Vento Toluca", "refacciones motos Toluca"],
+  title,
+  description,
+  // Search Console (propiedad de prefijo https://www.revolvergaraje.com/, cuenta team@somaspace.site)
+  verification: { google: "p490xFmVBzrTNCBKWWch7WDL0FV3IMsWMUvBJtjhQAI" },
   openGraph: {
-    title: "Revolver Garaje — Taller Multimarca Toluca",
-    description:
-      "Tu moto no debería estar parada esperando. Atendemos Bajaj, Vento, KTM y más.",
+    title,
+    description,
+    url: "https://www.revolvergaraje.com/",
+    siteName: "Revolver Garaje",
     type: "website",
     locale: "es_MX",
   },
 };
+
+// Contenedor GTM de Revolver (cuenta SomaSpace). El ID es público; la variable
+// de entorno permite apuntar a otro contenedor (ej. pruebas) sin tocar código.
+const gtmId = process.env.NEXT_PUBLIC_GTM_ID || "GTM-P7KDVMSJ";
 
 export default function RootLayout({
   children,
@@ -28,7 +40,25 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" className={zingRust.variable}>
-      <body>{children}</body>
+      <body>
+        {gtmId && (
+          <noscript>
+            <iframe
+              src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`}
+              height="0"
+              width="0"
+              style={{ display: "none", visibility: "hidden" }}
+            />
+          </noscript>
+        )}
+        {children}
+        {gtmId && <ClickTracking />}
+      </body>
+      {gtmId && (
+        <Script id="gtm" strategy="afterInteractive">
+          {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${gtmId}');`}
+        </Script>
+      )}
     </html>
   );
 }
