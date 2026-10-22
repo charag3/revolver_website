@@ -27,8 +27,9 @@ export const metadata: Metadata = {
   },
 };
 
-// GTM se activa solo cuando existe la variable de entorno (Vercel).
-const gtmId = process.env.NEXT_PUBLIC_GTM_ID;
+// Contenedor GTM de Revolver (cuenta SomaSpace). El ID es público; la variable
+// de entorno permite apuntar a otro contenedor (ej. pruebas) sin tocar código.
+const gtmId = process.env.NEXT_PUBLIC_GTM_ID || "GTM-P7KDVMSJ";
 
 export default function RootLayout({
   children,
