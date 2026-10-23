@@ -7,23 +7,34 @@ import { useEffect, useRef } from "react";
 // Cuadros de reposo (cuadro del animatic a 24 fps → índice a 12 fps).
 const TOTAL = 252;
 const REST = [48, 120, 192, 264, 336, 408, 480].map((f) => (f - 1) / 2);
-const HOLD = 0.18; // fracción de cada tramo en que la moto se queda quieta
+const HOLD = 0.22; // fracción del tramo entre escenas en que la moto se queda quieta
 
 const clamp = (v: number, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 const smooth = (t: number) => t * t * (3 - 2 * t);
 
-// Progreso de scroll (0–1) → cuadro. La moto descansa en cada composición y
-// se anima entre ellas, para que el texto se lea con la moto quieta.
-function frameAt(p: number): number {
-  const slots = REST.length - 1;
-  const u = clamp(p) * slots;
-  const i = Math.min(slots - 1, Math.floor(u));
-  const f = u - i;
-  if (i === 0 && f < HOLD) return REST[0] * (f / HOLD); // empuje inicial del faro
-  if (i === slots - 1 && f > 1 - HOLD)
-    return REST[slots] + (TOTAL - 1 - REST[slots]) * ((f - (1 - HOLD)) / HOLD);
+// Mapea el scroll (px) a un cuadro y a qué tan "quieta" está la moto en cada escena.
+// anchors[i] = scroll en que la escena i queda centrada (la moto descansa ahí).
+function mapScroll(y: number, anchors: number[], vh: number) {
+  const n = anchors.length;
+  const vis = new Array(n).fill(0);
+  // Antes de la primera escena: empuje inicial del faro (cuadros 0 → reposo C1)
+  const a0 = Math.max(anchors[0], vh * 0.35);
+  if (y <= a0) {
+    vis[0] = 1;
+    return { frame: REST[0] * clamp(y / a0), vis };
+  }
+  let i = 0;
+  while (i < n - 2 && y >= anchors[i + 1]) i++;
+  const len = anchors[i + 1] - anchors[i];
+  const f = clamp((y - anchors[i]) / len);
+  // Visibilidad del texto: 1 en la zona de reposo de cada extremo y se apaga en la transición
+  const fade = (d: number) => clamp(1 - (d - HOLD) / 0.18);
+  vis[i] = fade(f);
+  vis[i + 1] = fade(1 - f);
   const t = smooth(clamp((f - HOLD) / (1 - 2 * HOLD)));
-  return REST[i] + (REST[i + 1] - REST[i]) * t;
+  let frame = REST[i] + (REST[i + 1] - REST[i]) * t;
+  if (i === n - 2 && f > 1 - HOLD) frame = REST[n - 1] + (TOTAL - 1 - REST[n - 1]) * ((f - (1 - HOLD)) / HOLD);
+  return { frame, vis };
 }
 
 export default function MotoFondo() {
@@ -90,9 +101,24 @@ export default function MotoFondo() {
       ctx.drawImage(img, (cw - w) / 2, (ch - h) / 2, w, h);
     };
 
+    let scenes: HTMLElement[] = [];
+    let anchors: number[] = [];
+    const measure = () => {
+      scenes = [...document.querySelectorAll<HTMLElement>("[data-escena]")];
+      const vh = window.innerHeight;
+      anchors = scenes.map((el) => {
+        const top = el.getBoundingClientRect().top + window.scrollY;
+        return top + el.offsetHeight / 2 - vh / 2;
+      });
+    };
     const onScroll = () => {
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      target = frameAt(max > 0 ? window.scrollY / max : 0);
+      if (!anchors.length) return;
+      const { frame, vis } = mapScroll(window.scrollY, anchors, window.innerHeight);
+      target = frame;
+      scenes.forEach((el, k) => {
+        const pin = el.firstElementChild as HTMLElement | null;
+        if (pin) pin.style.setProperty("--vis", String(vis[k] ?? 0));
+      });
     };
 
     const tick = () => {
@@ -102,19 +128,25 @@ export default function MotoFondo() {
       raf = requestAnimationFrame(tick);
     };
 
+    const onResize = () => {
+      resize();
+      measure();
+      onScroll();
+    };
     resize();
+    measure();
     onScroll();
     shown = target;
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", () => {
-      resize();
-      onScroll();
-    });
+    window.addEventListener("resize", onResize);
+    window.addEventListener("load", onResize);
     raf = requestAnimationFrame(tick);
     return () => {
       alive = false;
       cancelAnimationFrame(raf);
       window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
+      window.removeEventListener("load", onResize);
     };
   }, []);
 

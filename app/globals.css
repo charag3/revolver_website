@@ -190,4 +190,4 @@ h3 {
 main { position: relative; }
 main > section,
 main > footer { position: relative; z-index: 1; }
-main > section[id] { background: transparent; }
+main > section[data-escena] { background: transparent; }
