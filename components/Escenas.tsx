@@ -25,6 +25,12 @@ function Servicio({ tag, titulo, desc, puntos }: { tag: string; titulo: string; 
   );
 }
 
+const resenas = [
+  { a: "Andrea H.", m: "Yamaha MT-03", t: "Desde que mandas mensaje y llegas al lugar te hacen sentir en confianza, el chico que te recibe muy amable te explica lo que se debe hacer y siempre al tanto de los detalles que le pides que revise…" },
+  { a: "Eduardo G.", m: "KTM Duke 200", t: "Excelente atención y trato por parte del personal, te explican las cosas de manera clara precisa y con paciencia, recomiendo este lugar para un buen servicio." },
+  { a: "Daniel C.", m: "Bajaj Pulsar NS 200", t: "Muy recomendado, explican todo por detalle muy buena comunicación y un excelente servicio rapidez y eficacia, en cuanto a costos igual muy accesibles." },
+];
+
 const porQue = [
   { t: "Stock inmediato multimarca", b: "A minutos del CEDIS Bajaj en Parque Toluca 2000 y con vínculos directos con distribuidores Vento y KTM. La pieza que necesitas llega antes que en cualquier otro taller del Estado de México." },
   { t: "Solo piezas genuinas", b: "No instalamos imitaciones. Cada refacción es original de fábrica, con la documentación que la respalda. Tu garantía de fabricante se mantiene intacta." },
@@ -82,7 +88,7 @@ export default function Escenas() {
         </div>
       </Escena>
 
-      {/* C6 — perfil. Calificación arriba */}
+      {/* C6 — perfil. Calificación arriba y tarjetas de reseñas translúcidas desde la mitad de la moto */}
       <Escena id="resenas" lado="centro" vertical="arriba">
         <div className={styles.texto}>
           <div className={styles.rating}>
@@ -91,10 +97,16 @@ export default function Escenas() {
             <span className={styles.autor}>+90 reseñas en Google</span>
           </div>
           <h2 className={styles.titulo}>Confianza que ruge en Toluca</h2>
-          <div className={styles.acciones} style={{ justifyContent: "center" }}>
-            <a href="https://g.page/r/CRrDGnn4DcdLEAE/review" target="_blank" rel="noopener noreferrer" className={hero.linkSec}>Escribir reseña →</a>
-          </div>
         </div>
+        <div className={`${styles.cards} ${styles.abajo}`}>
+          {resenas.map((r) => (
+            <figure key={r.a} className={`${styles.card} ${styles.resena}`}>
+              <blockquote>“{r.t}”</blockquote>
+              <figcaption><strong>{r.a}</strong> · {r.m}</figcaption>
+            </figure>
+          ))}
+        </div>
+        <a href="https://g.page/r/CRrDGnn4DcdLEAE/review" target="_blank" rel="noopener noreferrer" className={`${hero.linkSec} ${styles.escribir}`}>Escribir reseña →</a>
       </Escena>
 
       {/* C7 — moto armada, 3/4 frontal. Texto a la izquierda */}
