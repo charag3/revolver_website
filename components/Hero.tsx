@@ -42,6 +42,13 @@ export default function Hero() {
               </svg>
               Agendar Cita
             </a>
+            <a
+              href="tel:+527225663204"
+              data-ubicacion="hero"
+              className={styles.linkSec}
+            >
+              Llamar →
+            </a>
             <a href="#servicios" className={styles.linkSec}>
               Ver servicios →
             </a>

@@ -36,6 +36,13 @@ export default function Contacto() {
               </svg>
               Agendar Cita por WhatsApp
             </a>
+            <a
+              href="tel:+527225663204"
+              data-ubicacion="contacto"
+              className={styles.callLink}
+            >
+              O llama al 722 566 3204 →
+            </a>
           </div>
 
           <div className={styles.mapWrap}>
