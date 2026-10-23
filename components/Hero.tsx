@@ -1,17 +1,7 @@
 "use client";
-import { useState, useEffect } from "react";
-import Image from "next/image";
 import styles from "./Hero.module.css";
 
 export default function Hero() {
-  const [offset, setOffset] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => setOffset(window.pageYOffset);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
     <section className={styles.hero} id="inicio">
       {/* Diagonal accent stripe */}
@@ -62,21 +52,6 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* RIGHT — helmet image */}
-        <div 
-          className={styles.visual}
-          style={{ "--parallax-offset": `-${offset * 0.15}px` } as React.CSSProperties}
-        >
-          <div className={styles.glow} />
-          <Image
-            src="/helmet_v2.png"
-            alt="Casco Revolver Garaje — Taller Multimarca Toluca"
-            width={720}
-            height={720}
-            className={styles.helmet}
-            priority
-          />
-        </div>
       </div>
 
       {/* Trust bar */}

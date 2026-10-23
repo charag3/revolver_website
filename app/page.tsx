@@ -6,6 +6,7 @@ import Servicios from "@/components/Servicios";
 import Testimonios from "@/components/Testimonios";
 import Contacto from "@/components/Contacto";
 import Footer from "@/components/Footer";
+import MotoFondo from "@/components/MotoFondo";
 
 export const metadata: Metadata = {
   alternates: {
@@ -94,6 +95,7 @@ export default function Home() {
           __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
         }}
       />
+      <MotoFondo />
       <Navbar />
       <Hero />
       <Autoridad />
