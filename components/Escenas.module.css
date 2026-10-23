@@ -73,6 +73,8 @@
   .titulo { font-size: clamp(1.7rem, 8vw, 2.6rem); margin-bottom: 12px; }
   .desc { font-size: 0.95rem; }
   .lista { font-size: 0.88rem; gap: 5px; margin-bottom: 0; }
+  .lista { display: none; }
+  .desc { margin-bottom: 10px; }
   .pin { justify-content: flex-start !important; }
   .cards { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; margin-left: -6vw; margin-right: -6vw; padding: 0 6vw; }
   .card { flex: 0 0 78%; scroll-snap-align: center; }
