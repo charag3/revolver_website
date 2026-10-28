@@ -1,5 +1,6 @@
 import hero from "./Hero.module.css";
 import styles from "./Escenas.module.css";
+import Carrusel from "./Carrusel";
 
 const WA = "https://wa.me/527225663204";
 const TEL = "tel:+527225663204";
@@ -17,10 +18,14 @@ function Escena({ id, lado, vertical = "medio", ancho, children }: {
 function Servicio({ tag, titulo, desc, puntos }: { tag: string; titulo: string; desc: string; puntos: string[] }) {
   return (
     <div className={styles.texto}>
-      <span className={styles.tag}>{tag}</span>
-      <h2 className={styles.titulo}>{titulo}</h2>
-      <p className={styles.desc}>{desc}</p>
-      <ul className={styles.lista}>{puntos.map((p) => <li key={p}>{p}</li>)}</ul>
+      <div className={styles.cab}>
+        <span className={styles.tag}>{tag}</span>
+        <h2 className={styles.titulo}>{titulo}</h2>
+      </div>
+      <div className={styles.det}>
+        <p className={styles.desc}>{desc}</p>
+        <ul className={styles.lista}>{puntos.map((p) => <li key={p}>{p}</li>)}</ul>
+      </div>
     </div>
   );
 }
@@ -43,9 +48,11 @@ export default function Escenas() {
       {/* C1 — faro. Texto a la izquierda; el faro queda al lado derecho */}
       <Escena id="inicio" lado="izq" vertical="medio" ancho>
         <div className={`${hero.copy} ${styles.texto}`}>
-          <span className={hero.preheader}>Toluca, Méx.</span>
-          <h1 className={hero.title}>Taller de motos <br />en <span className={hero.accent}>Toluca.</span></h1>
-          <p className={hero.subtitle}>
+          <div className={styles.cab}>
+            <span className={hero.preheader}>Toluca, Méx.</span>
+            <h1 className={hero.title}>Taller de motos <br />en <span className={hero.accent}>Toluca.</span></h1>
+          </div>
+          <p className={`${hero.subtitle} ${styles.det}`}>
             Especialista certificado: <strong>KTM, Bajaj, Vento y Alta Cilindrada.</strong> <br className={styles.soloEscritorio} />
             <span className={styles.soloEscritorio}>Atención profesional en <strong>Metepec, Lerma y Zinacantepec.</strong></span>
           </p>
@@ -83,9 +90,9 @@ export default function Escenas() {
           <span className={styles.tag}>Por qué elegirnos</span>
           <h2 className={`${styles.titulo} ${styles.chico}`}>El taller que conoce tu moto</h2>
         </div>
-        <div className={`${styles.cards} ${styles.abajo}`}>
+        <Carrusel className={styles.abajo}>
           {porQue.map((c) => <div key={c.t} className={styles.card}><h3>{c.t}</h3><p>{c.b}</p></div>)}
-        </div>
+        </Carrusel>
       </Escena>
 
       {/* C6 — perfil. Calificación arriba y tarjetas de reseñas translúcidas desde la mitad de la moto */}
@@ -98,22 +105,25 @@ export default function Escenas() {
           </div>
           <h2 className={styles.titulo}>Confianza que ruge en Toluca</h2>
         </div>
-        <div className={`${styles.cards} ${styles.abajo}`}>
+        <Carrusel className={styles.abajo}>
           {resenas.map((r) => (
             <figure key={r.a} className={`${styles.card} ${styles.resena}`}>
               <blockquote>“{r.t}”</blockquote>
               <figcaption><strong>{r.a}</strong> · {r.m}</figcaption>
             </figure>
           ))}
-        </div>
+        </Carrusel>
         <a href="https://g.page/r/CRrDGnn4DcdLEAE/review" target="_blank" rel="noopener noreferrer" className={`${hero.linkSec} ${styles.escribir}`}>Escribir reseña →</a>
       </Escena>
 
       {/* C7 — moto armada, 3/4 frontal. Texto a la izquierda */}
       <Escena id="contacto" lado="izq" vertical="medio">
         <div className={styles.texto}>
-          <span className={styles.tag}>Visítanos</span>
-          <h2 className={styles.titulo}>Visita el <em>Cuartel</em></h2>
+          <div className={styles.cab}>
+            <span className={styles.tag}>Visítanos</span>
+            <h2 className={styles.titulo}>Visita el <em>Cuartel</em></h2>
+          </div>
+          <div className={styles.det}>
           <p className={styles.dato}><strong>Av. Cuauhtémoc 238</strong>, El Carmen Totoltepec, Santa María Totoltepec, CP 50240, Toluca, Méx.</p>
           <p className={styles.dato}>Lunes a viernes 9:00–19:00 · Sábados 9:00–16:00</p>
           <div className={styles.acciones}>
@@ -121,7 +131,8 @@ export default function Escenas() {
             <a href={TEL} data-ubicacion="contacto" className={hero.linkSec}>O llama al 722 566 3204 →</a>
           </div>
         </div>
-      </Escena>
+        </div>
+        </Escena>
 
       <section id="ubicacion" className={styles.mapa}>
         <iframe

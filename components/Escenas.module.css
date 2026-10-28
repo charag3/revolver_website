@@ -68,21 +68,34 @@
 /* Celular / pantalla vertical: composición con texto arriba y detalle abajo */
 .heroAcc { margin-top: 0; }
 
+.carrusel { width: 100%; }
+.puntos { display: none; }
+
+/* Celular / pantalla vertical: eyebrow + título arriba (el cuadro deja libre el 30 % superior),
+   detalle abajo, y tarjetas en carrusel lateral. */
 @media (max-aspect-ratio: 1/1) {
+  .pin { height: 100svh; padding: 84px 6vw 4svh; justify-content: flex-start !important; }
   .soloEscritorio { display: none; }
-  .heroAcc { margin-top: auto; width: 100%; align-items: center !important; padding-bottom: 2vh; }
+  .texto { display: contents !important; }
   .texto, .texto * { text-align: left; align-items: flex-start; }
   .centro .texto, .centro .texto * { text-align: center; align-items: center; }
-  .pin { padding: 84px 6vw 4vh; }
-  .izq .texto, .der .texto, .centro .texto { max-width: 100%; margin: 0; text-align: left; }
-  .centro .texto { text-align: center; }
-  .titulo { font-size: clamp(1.7rem, 8vw, 2.6rem); margin-bottom: 12px; }
-  .desc { font-size: 0.95rem; }
-  .lista { font-size: 0.88rem; gap: 5px; margin-bottom: 0; }
+  .cab { display: flex; flex-direction: column; width: 100%; }
+  .det { margin-top: auto; width: calc(100% + 12vw); margin-left: -6vw; margin-right: -6vw; padding: 36px 6vw 1.5svh; background: linear-gradient(to top, rgba(0, 0, 0, 0.78) 55%, transparent); }
+  .heroAcc { margin-top: 0; width: 100%; align-items: center !important; padding-bottom: 1svh; }
+  .titulo { font-size: clamp(1.7rem, 8vw, 2.6rem); margin-bottom: 8px; }
+  .chico { font-size: clamp(1.5rem, 7vw, 2.2rem); }
+  .desc { font-size: 0.95rem; margin-bottom: 0; }
   .lista { display: none; }
-  .desc { margin-bottom: 10px; }
-  .pin { justify-content: flex-start !important; }
-  .cards { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; margin-left: -6vw; margin-right: -6vw; padding: 0 6vw; }
-  .card { flex: 0 0 78%; scroll-snap-align: center; }
   .rating { margin-bottom: 8px; }
+  .abajo { margin-top: auto; }
+
+  .cards { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; margin: 0 -6vw; padding: 0 6vw 2px; scroll-padding: 0 6vw; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .cards::-webkit-scrollbar { display: none; }
+  .card { flex: 0 0 84%; scroll-snap-align: start; padding: 16px 16px 18px; }
+  .card h3 { font-size: 0.85rem; }
+  .card p, .resena blockquote { font-size: 0.82rem; line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 6; -webkit-box-orient: vertical; overflow: hidden; }
+  .puntos { display: flex; justify-content: center; gap: 7px; margin-top: 10px; }
+  .punto, .puntoOn { width: 6px; height: 6px; border-radius: 50%; background: rgba(255, 255, 255, 0.3); transition: background 0.2s, transform 0.2s; }
+  .puntoOn { background: var(--primary); transform: scale(1.25); }
+  .escribir { margin-top: 8px; }
 }
