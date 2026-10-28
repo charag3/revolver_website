@@ -5,11 +5,13 @@ import { useEffect, useRef } from "react";
 // Fondo animado: una moto que se arma mientras se hace scroll en toda la página.
 // Secuencia de cuadros (12 fps) en un canvas fijo detrás del contenido.
 // Cuadros de reposo (cuadro del animatic a 24 fps → índice a 12 fps).
-const TOTAL = 252;
+const TOTAL = 253;
+// Carpetas con versión AVIF (más ligera, misma calidad)
+const AVIF_DIRS: Record<string, boolean> = { d: true, m: true };
 // Cuadros (a 24 fps) donde la moto descansa en cada composición. Escritorio = video real calibrado
-// contra los cuadros clave; celular = animatic del blocking (hasta tener el video vertical).
+// contra los cuadros clave; celular = video vertical 9:16 de 720p.
 const REST_D = [48, 115, 202, 285, 363, 437, 485].map((f) => (f - 1) / 2);
-const REST_M = [48, 120, 192, 264, 336, 408, 480].map((f) => (f - 1) / 2);
+const REST_M = [48, 114, 186, 282, 382, 447, 494].map((f) => (f - 1) / 2);
 const HOLD = 0.22; // fracción del tramo entre escenas en que la moto se queda quieta
 
 const clamp = (v: number, a = 0, b = 1) => Math.min(b, Math.max(a, v));
@@ -70,8 +72,14 @@ export default function MotoFondo() {
         frames[k] = img;
         loadNext();
       };
-      img.onerror = loadNext;
-      img.src = `/moto/${dir}/${String(k).padStart(3, "0")}.webp`;
+      const n = String(k).padStart(3, "0");
+      img.onerror = () => {
+        // Respaldo en WebP si el navegador no soporta AVIF
+        if (img.dataset.fb || !AVIF_DIRS[dir]) return loadNext();
+        img.dataset.fb = "1";
+        img.src = `/moto/${dir}/${n}.webp`;
+      };
+      img.src = AVIF_DIRS[dir] ? `/moto/${dir}_avif/${n}.avif` : `/moto/${dir}/${n}.webp`;
     };
     for (let c = 0; c < 4; c++) loadNext();
 
