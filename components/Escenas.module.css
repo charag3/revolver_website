@@ -68,6 +68,26 @@
 /* Celular / pantalla vertical: composición con texto arriba y detalle abajo */
 .heroAcc { margin-top: 0; }
 
+/* Hero: especialidades como píldoras de beneficios + botones */
+.pildoras { list-style: none; padding: 0; margin: 22px 0 0; display: flex; flex-wrap: wrap; gap: 10px; }
+.pil, .pilPrincipal {
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 8px 14px; border-radius: 999px; color: #e8e8e8;
+  background: rgba(255, 255, 255, 0.07); border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(6px);
+}
+.pilPrincipal { color: var(--primary); border-color: rgba(253, 221, 31, 0.55); background: rgba(253, 221, 31, 0.1); }
+.heroBtns { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; margin-top: 26px; }
+.llamar {
+  font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--text-muted); text-decoration: none; transition: color var(--transition);
+}
+.llamar:hover { color: var(--primary); }
+
+@media (min-aspect-ratio: 1/1) {
+  .ancho .pin { padding-left: 9vw; } /* hero de escritorio un poco más a la derecha */
+}
+
 .carrusel { width: 100%; }
 .puntos { display: none; }
 
@@ -88,6 +108,17 @@
   .lista { display: none; }
   .rating { margin-bottom: 8px; }
   .abajo { margin-top: auto; }
+
+  /* Hero en celular: título centrado y más abajo; píldoras y botones grandes abajo */
+  .texto .heroCab, .texto .heroCab * { text-align: center; align-items: center; }
+  .heroCab { margin-top: 7svh; }
+  .pildoras { margin-top: auto; justify-content: center; gap: 8px; padding: 0 2vw; }
+  .pil, .pilPrincipal { font-size: 0.68rem; padding: 7px 12px; }
+  .heroAcc { padding-bottom: 1svh; }
+  .heroBtns { flex-direction: column; align-items: stretch; width: 100%; gap: 12px; margin-top: 18px; }
+  .heroBtns a { width: 100%; justify-content: center; text-align: center; border-radius: var(--radius); }
+  .heroBtns a:first-child { padding: 19px 24px; font-size: 1.05rem; }
+  .llamar { padding: 16px 24px; font-size: 0.95rem; color: var(--text); border: 2px solid rgba(255, 255, 255, 0.35); background: rgba(0, 0, 0, 0.35); backdrop-filter: blur(6px); }
 
   .cards { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; margin: 0 -6vw; padding: 0 6vw 2px; scroll-padding: 0 6vw; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
   .cards::-webkit-scrollbar { display: none; }
