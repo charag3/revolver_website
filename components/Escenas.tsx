@@ -36,6 +36,8 @@ const resenas = [
   { a: "Daniel C.", m: "Bajaj Pulsar NS 200", t: "Muy recomendado, explican todo por detalle muy buena comunicación y un excelente servicio rapidez y eficacia, en cuanto a costos igual muy accesibles." },
 ];
 
+const especialidades = ["Especialista certificado", "KTM", "Bajaj", "Vento", "Alta cilindrada"];
+
 const porQue = [
   { t: "Stock inmediato multimarca", b: "A minutos del CEDIS Bajaj en Parque Toluca 2000 y con vínculos directos con distribuidores Vento y KTM. La pieza que necesitas llega antes que en cualquier otro taller del Estado de México." },
   { t: "Solo piezas genuinas", b: "No instalamos imitaciones. Cada refacción es original de fábrica, con la documentación que la respalda. Tu garantía de fabricante se mantiene intacta." },
@@ -48,21 +50,20 @@ export default function Escenas() {
       {/* C1 — faro. Texto a la izquierda; el faro queda al lado derecho */}
       <Escena id="inicio" lado="izq" vertical="medio" ancho>
         <div className={`${hero.copy} ${styles.texto}`}>
-          <div className={styles.cab}>
+          <div className={`${styles.cab} ${styles.heroCab}`}>
             <span className={hero.preheader}>Toluca, Méx.</span>
             <h1 className={hero.title}>Taller de motos <br />en <span className={hero.accent}>Toluca.</span></h1>
           </div>
-          <p className={`${hero.subtitle} ${styles.det}`}>
-            Especialista certificado: <strong>KTM, Bajaj, Vento y Alta Cilindrada.</strong> <br className={styles.soloEscritorio} />
-            <span className={styles.soloEscritorio}>Atención profesional en <strong>Metepec, Lerma y Zinacantepec.</strong></span>
-          </p>
+          <ul className={styles.pildoras} aria-label="Especialidades">
+            {especialidades.map((e, k) => <li key={e} className={k === 0 ? styles.pilPrincipal : styles.pil}>{e}</li>)}
+          </ul>
+          <p className={`${hero.subtitle} ${styles.det} ${styles.soloEscritorio}`}>Atención profesional en <strong>Metepec, Lerma y Zinacantepec.</strong></p>
         </div>
         <div className={`${styles.heroAcc} ${hero.copy}`}>
-          <div className={hero.actions}>
+          <div className={styles.heroBtns}>
             <a href={WA} data-ubicacion="hero" target="_blank" rel="noopener noreferrer" className="btn-primary">Agendar Cita</a>
-            <a href={TEL} data-ubicacion="hero" className={hero.linkSec}>Llamar →</a>
+            <a href={TEL} data-ubicacion="hero" className={styles.llamar}>Llamar <span aria-hidden="true">→</span></a>
           </div>
-          <div className={`${hero.brands} ${styles.soloEscritorio}`}>{["BAJAJ", "VENTO", "KTM", "Y MÁS"].map((b) => <span key={b} className={hero.pill}>{b}</span>)}</div>
         </div>
       </Escena>
 
