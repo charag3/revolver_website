@@ -6,7 +6,10 @@ import { useEffect, useRef } from "react";
 // Secuencia de cuadros (12 fps) en un canvas fijo detrás del contenido.
 // Cuadros de reposo (cuadro del animatic a 24 fps → índice a 12 fps).
 const TOTAL = 252;
-const REST = [48, 120, 192, 264, 336, 408, 480].map((f) => (f - 1) / 2);
+// Cuadros (a 24 fps) donde la moto descansa en cada composición. Escritorio = video real calibrado
+// contra los cuadros clave; celular = animatic del blocking (hasta tener el video vertical).
+const REST_D = [48, 115, 202, 285, 363, 437, 485].map((f) => (f - 1) / 2);
+const REST_M = [48, 120, 192, 264, 336, 408, 480].map((f) => (f - 1) / 2);
 const HOLD = 0.22; // fracción del tramo entre escenas en que la moto se queda quieta
 
 const clamp = (v: number, a = 0, b = 1) => Math.min(b, Math.max(a, v));
@@ -14,7 +17,7 @@ const smooth = (t: number) => t * t * (3 - 2 * t);
 
 // Mapea el scroll (px) a un cuadro y a qué tan "quieta" está la moto en cada escena.
 // anchors[i] = scroll en que la escena i queda centrada (la moto descansa ahí).
-function mapScroll(y: number, anchors: number[], vh: number) {
+function mapScroll(y: number, anchors: number[], vh: number, REST: number[]) {
   const n = anchors.length;
   const vis = new Array(n).fill(0);
   // Antes de la primera escena: empuje inicial del faro (cuadros 0 → reposo C1)
@@ -56,7 +59,7 @@ export default function MotoFondo() {
     let alive = true;
 
     // Carga progresiva: primero cuadros de reposo y saltos grandes, luego el resto.
-    const order = [...REST.map(Math.round), ...Array.from({ length: TOTAL }, (_, k) => k)];
+    const order = [...(portrait ? REST_M : REST_D).map(Math.round), ...Array.from({ length: TOTAL }, (_, k) => k)];
     const queue = [...new Set(order)];
     let next = 0;
     const loadNext = () => {
@@ -113,7 +116,7 @@ export default function MotoFondo() {
     };
     const onScroll = () => {
       if (!anchors.length) return;
-      const { frame, vis } = mapScroll(window.scrollY, anchors, window.innerHeight);
+      const { frame, vis } = mapScroll(window.scrollY, anchors, window.innerHeight, portrait ? REST_M : REST_D);
       target = frame;
       scenes.forEach((el, k) => {
         const pin = el.firstElementChild as HTMLElement | null;
