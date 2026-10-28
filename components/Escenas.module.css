@@ -1,0 +1,101 @@
+/* Cada escena mide 150vh; el contenido queda fijo (sticky) 100vh mientras la moto
+   descansa en su composición. MotoFondo ajusta --vis (0–1) según qué tan quieta está. */
+.escena { position: relative; height: 150vh; }
+
+.pin {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 110px 5vw 6vh;
+  opacity: var(--vis, 1);
+  pointer-events: none;
+}
+.pin > * { pointer-events: auto; }
+
+/* Lado libre de la composición (según el blocking, escritorio 16:9) */
+.izq .texto  { max-width: min(36vw, 560px); }
+.izq.ancho .texto { max-width: min(46vw, 680px); }
+.chico { font-size: clamp(1.4rem, 2.6vw, 2.4rem); margin-bottom: 0; }
+.der .texto  { max-width: min(30vw, 480px); margin-left: auto; margin-right: 2vw; }
+.centro .texto { max-width: 760px; margin: 0 auto; text-align: center; }
+.arriba { justify-content: flex-start; }
+.medio  { justify-content: center; }
+
+.abajo { margin-top: auto; }
+
+.tag {
+  font-size: 0.7rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 14px; display: block;
+}
+.titulo {
+  font-family: var(--font-zing), sans-serif; text-transform: uppercase; line-height: 1.02;
+  font-size: clamp(2rem, 4.2vw, 4rem); margin: 0 0 18px; font-style: italic;
+}
+.titulo em { color: var(--primary); font-style: italic; }
+.desc { color: #d6d6d6; font-size: 1.02rem; line-height: 1.55; margin: 0 0 18px; }
+.lista { list-style: none; padding: 0; margin: 0 0 24px; display: grid; gap: 8px; color: #cfcfcf; font-size: 0.95rem; }
+.lista li::before { content: "▸ "; color: var(--primary); }
+
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.card {
+  background: rgba(10, 10, 10, 0.62); backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border); border-top: 3px solid var(--primary);
+  border-radius: var(--radius); padding: 22px 22px 24px;
+}
+.card h3 { font-size: 0.95rem; letter-spacing: 0.06em; text-transform: uppercase; margin: 0 0 8px; color: var(--primary); }
+.card p { margin: 0; color: #cfcfcf; font-size: 0.92rem; line-height: 1.5; }
+
+.resena { margin: 0; background: rgba(12, 12, 12, 0.38); backdrop-filter: blur(4px); border-top-color: rgba(255, 255, 255, 0.18); }
+.resena blockquote { margin: 0 0 12px; color: #ececec; font-size: 0.9rem; line-height: 1.5; }
+.resena figcaption { color: var(--text-muted); font-size: 0.8rem; }
+.resena figcaption strong { color: var(--primary); }
+.escribir { align-self: center; margin-top: 14px; }
+
+.rating { display: flex; gap: 12px; align-items: baseline; justify-content: center; margin-bottom: 14px; }
+.score { font-family: var(--font-zing), sans-serif; font-size: clamp(2.6rem, 6vw, 5rem); color: var(--primary); font-style: italic; }
+.stars { color: var(--primary); letter-spacing: 3px; }
+.quote { color: #e6e6e6; font-size: 1.05rem; line-height: 1.55; margin: 0 auto 6px; max-width: 640px; }
+.autor { color: var(--text-muted); font-size: 0.85rem; }
+
+.dato { margin: 0 0 8px; color: #d6d6d6; line-height: 1.5; }
+.acciones { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; margin-top: 18px; }
+
+.mapa { position: relative; z-index: 1; background: #000; padding: 80px 5vw; }
+.mapa iframe { width: 100%; height: 380px; border: 0; border-radius: var(--radius); filter: invert(90%) hue-rotate(180deg) grayscale(80%); }
+
+/* Celular / pantalla vertical: composición con texto arriba y detalle abajo */
+.heroAcc { margin-top: 0; }
+
+.carrusel { width: 100%; }
+.puntos { display: none; }
+
+/* Celular / pantalla vertical: eyebrow + título arriba (el cuadro deja libre el 30 % superior),
+   detalle abajo, y tarjetas en carrusel lateral. */
+@media (max-aspect-ratio: 1/1) {
+  .pin { height: 100svh; padding: 84px 6vw 4svh; justify-content: flex-start !important; }
+  .soloEscritorio { display: none; }
+  .texto { display: contents !important; }
+  .texto, .texto * { text-align: left; align-items: flex-start; }
+  .centro .texto, .centro .texto * { text-align: center; align-items: center; }
+  .cab { display: flex; flex-direction: column; width: 100%; }
+  .det { margin-top: auto; width: calc(100% + 12vw); margin-left: -6vw; margin-right: -6vw; padding: 36px 6vw 1.5svh; background: linear-gradient(to top, rgba(0, 0, 0, 0.78) 55%, transparent); }
+  .heroAcc { margin-top: 0; width: 100%; align-items: center !important; padding-bottom: 1svh; }
+  .titulo { font-size: clamp(1.7rem, 8vw, 2.6rem); margin-bottom: 8px; }
+  .chico { font-size: clamp(1.5rem, 7vw, 2.2rem); }
+  .desc { font-size: 0.95rem; margin-bottom: 0; }
+  .lista { display: none; }
+  .rating { margin-bottom: 8px; }
+  .abajo { margin-top: auto; }
+
+  .cards { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; margin: 0 -6vw; padding: 0 6vw 2px; scroll-padding: 0 6vw; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .cards::-webkit-scrollbar { display: none; }
+  .card { flex: 0 0 84%; scroll-snap-align: start; padding: 16px 16px 18px; }
+  .card h3 { font-size: 0.85rem; }
+  .card p, .resena blockquote { font-size: 0.82rem; line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 6; -webkit-box-orient: vertical; overflow: hidden; }
+  .puntos { display: flex; justify-content: center; gap: 7px; margin-top: 10px; }
+  .punto, .puntoOn { width: 6px; height: 6px; border-radius: 50%; background: rgba(255, 255, 255, 0.3); transition: background 0.2s, transform 0.2s; }
+  .puntoOn { background: var(--primary); transform: scale(1.25); }
+  .escribir { margin-top: 8px; }
+}

@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
-import Autoridad from "@/components/Autoridad";
-import Servicios from "@/components/Servicios";
-import Testimonios from "@/components/Testimonios";
-import Contacto from "@/components/Contacto";
 import Footer from "@/components/Footer";
+import MotoFondo from "@/components/MotoFondo";
+import Escenas from "@/components/Escenas";
 
 export const metadata: Metadata = {
   alternates: {
@@ -94,12 +91,9 @@ export default function Home() {
           __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
         }}
       />
+      <MotoFondo />
       <Navbar />
-      <Hero />
-      <Autoridad />
-      <Servicios />
-      <Testimonios />
-      <Contacto />
+      <Escenas />
       <Footer />
     </main>
   );
